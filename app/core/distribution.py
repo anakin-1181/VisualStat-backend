@@ -1,13 +1,15 @@
 from app.utils.image import fig_to_image
 from app.models.model import Plotparams
 from scipy.stats import uniform, binom
+# use off-screen rendering
+import matplotlib
+matplotlib.use("Agg")  
 import matplotlib.pyplot as plt
 
 def generate_distribution(params: Plotparams):
-    match params.distribution:
-        case "binomial":
+    if params.distribution == "binomial":
             fig = plot_binomial(params)
-        case "uniform":
+    elif params.distribution == "uniform":
             fig = plot_uniform(params)
     return fig_to_image(fig)
 

@@ -7,7 +7,6 @@ class UniformParams(BaseModel):
     distribution: Literal["uniform"]
     size: int = Field(default=10000, gt=0, le=100000)
     show_mean: bool = True
-    show_sd: bool = True
     
     low: float = 0
     high: float = 1
