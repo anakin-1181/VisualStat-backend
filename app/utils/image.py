@@ -10,7 +10,7 @@ def fig_to_image(fig):
     plt.close(fig)
     # Reset and read the buffer
     buf.seek(0)
-    return 
+    return StreamingResponse(buf, media_type="image/png")
     
 
 
