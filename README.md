@@ -44,7 +44,7 @@ Interact with the service via REST endpoints documented in Swagger UI.
 ## Data flow
 ```mermaid
 flowchart LR
-    A[input] -- JSON --> B[main] --> C[model] -- Pydantic validate --> D[core] -- Generate figure --> E[image] -- Turn figure into image--> B --Image --> A
+    A[frontend] -- JSON --> B[main] --> C[model] -- Pydantic validate --> D[core] -- Generate figure --> E[image] -- Turn figure into image--> B --Image --> A
 ```
 
 ## Tech Stack
