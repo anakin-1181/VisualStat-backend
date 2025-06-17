@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 def generate_distribution(params: Plotparams):
     match params.distribution:
         case "binomial":
-            pass
+            fig = plot_binomial(params)
         case "uniform":
-            pass
-    pass
+            fig = plot_uniform(params)
+    return fig_to_image(fig)
 
 def plot_binomial(params: Plotparams):
     # plot figure for different sample size
@@ -24,18 +24,31 @@ def plot_binomial(params: Plotparams):
     # show mean
     if show_mean:
         mean_x = n*p
-        # if the previous bin is empty
-        mean_y =  patches[int(mean_x)].get_height() if patches[int(mean_x)-1].get_height() == 0 else patches[int(mean_x)-1].get_height() 
+        mean_y = patches[len([x for x in bin_edges if x <= mean_x])-1].get_height() # get the height of the patch with x as mean
         ax.vlines(mean_x,0,mean_y,linestyles="--",colors="black",linewidth=0.8)
         ax.text(x=mean_x, y=mean_y + 10, s=fr"$\mu$",va="top",ha="center", fontsize="8")
     # export image
-    pass
-
+    return fig
 
 
 def plot_uniform(params: Plotparams):
-    pass
-    
+    low,high,size,show_mean = params.low, params.high, params.size, params.show_mean
+    # plot figure for different sample size
+    samples = uniform.rvs(low,high,size=size)
+    fig, ax = plt.subplots(figsize=(6,4))
+    counts, bin_edges, patches = plt.hist(samples)
+    # add description to the diagram
+    ax.set_ylabel("count")
+    ax.set_xlabel("value")
+    ax.set_title(f"{size} samples of X~U({low},{high})")
+    # show mean
+    if show_mean:
+        mean_x = (low + high)/2
+        mean_y = patches[len([x for x in bin_edges if x <= mean_x])-1].get_height() # get the height of the patch with x as mean
+        ax.vlines(mean_x,0,mean_y,linestyles="--",colors="black",linewidth=0.8)
+        ax.text(x=mean_x + 0.03, y=mean_y / 2, s=fr"$\mu$",va="top",ha="center", fontsize="8")
+    # export image
+    return fig
 
         
         

@@ -9,8 +9,8 @@ class UniformParams(BaseModel):
     show_mean: bool = True
     show_sd: bool = True
     
-    lower: float = 0
-    upper: float = 1
+    low: float = 0
+    high: float = 1
     
 class BinomialParams(BaseModel):
     distribution: Literal["binomial"]
