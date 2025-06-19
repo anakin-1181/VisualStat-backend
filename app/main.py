@@ -1,9 +1,6 @@
 from fastapi import FastAPI
 from app.core.distribution import generate_distribution
 from app.models.model import Plotparams
-
-app = FastAPI()
-
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
