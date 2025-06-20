@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.core.distribution import generate_distribution
 from app.models.model import Plotparams
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 
 app = FastAPI()
 
@@ -14,6 +14,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.head("/health")
+async def health_head():
+    # Return only headers, no JSON body
+    return Response(status_code=200)
 
 @app.get("/")
 def greet():
